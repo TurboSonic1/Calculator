@@ -6,10 +6,6 @@ int main()
 	std::cout << "please input the first number you want to calculate" << std::endl;
 	int x;
 	int y;
-	int a;
-	int b;
-	int c;
-	int d;
 	std::cin >> x;
 	std::cout << "Please input the second number you want to calculate" << std::endl;
 	std::cin >> y;
