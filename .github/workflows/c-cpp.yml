@@ -15,8 +15,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: install cppunit
       run: sudo apt install -y libcppunit-dev
+    - name: chmod
+      run: git update-index --chmod=+x ./configure
     - name: configure
-      run: sudo ./configure
+      run: ./configure
     - name: make
       run: make
     - name: make check
