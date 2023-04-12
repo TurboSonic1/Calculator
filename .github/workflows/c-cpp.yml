@@ -16,7 +16,7 @@ jobs:
     - name: install cppunit
       run: sudo apt install -y libcppunit-dev
     - name: chmod
-      run: git update-index --chmod=+x ./configure
+      run: ls
     - name: configure
       run: ./configure
     - name: make
