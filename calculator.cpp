@@ -19,7 +19,7 @@ for (;;) { //error handling for first number
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-    else if (cin.eof());
+    else if (cin.good());
         goto initialize0; //verified to be good and continues
 }
 initialize0:
@@ -32,7 +32,7 @@ for (;;) { //error handling for second number
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-    else if (cin.eof());
+    else if (cin.good());
         goto calculate; //continues to actual calculation
 }
 calculate: //function for calculation
