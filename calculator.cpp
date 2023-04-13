@@ -23,7 +23,7 @@ for (;;) { //error handling for first number
     else if (cin.good());
         break; //verified to be good and continues
 }
-initialize0:
+operation:
     cout << "what math operation would you like to use" << endl;
     cin >> math;
         switch (math) {
@@ -37,7 +37,7 @@ initialize0:
                 break;
             default:
                 cout << "This operation is not recognized please use standard arithmetic math" << endl;
-                goto initialize;
+                goto operation;
         }
 for (;;) { //error handling for second number
 	cout << "Please input the second number you want to calculate" << flush << endl;
