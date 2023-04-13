@@ -1,5 +1,7 @@
 #include <limits>
 #include <iostream>
+#include <cmath>
+#include <string>
 using namespace std;
 
 void function() 
@@ -10,7 +12,7 @@ initialize:
 	    x = 0; // initialized as 0 to ensure its an integer
 	double y;
 	    y = 0;
-	char math = 'h';
+	string longword;
 for (;;) { //error handling for first number
 	cout << "please input the first number you want to calculate" << flush << endl; //flush is needed to verify that its cleared
 	cin >> x;
@@ -25,7 +27,8 @@ for (;;) { //error handling for first number
 }
 operation:
     cout << "what math operation would you like to use" << endl;
-    cin >> math;
+    cin >> longword;
+    char math = longword[0]; //only takes first letter of what the user types to prevents errors
         switch (math) {
             case '+':
                 break;
@@ -35,8 +38,12 @@ operation:
                 break;
             case '/':
                 break;
+            case 's': //todo: make this more clear to user that its square root
+                break;
+            case '^':
+                break;
             default:
-                cout << "This operation is not recognized please use standard arithmetic math" << endl;
+                cout << "This operation is not recognized please use standard arithmetic math or squareroots/exponents" << endl;
                 goto operation;
         }
 for (;;) { //error handling for second number
@@ -56,23 +63,32 @@ switch (math) {
     case '+':
         cout << x << " + " << y << " = " << (double)x + (double)y << endl;
 	    cout << "" << endl;
-	        goto initialize;
+	        break;
     case '-':
-            cout << x << " - " << y << " = " << (double)x - (double)y << endl;
-	        cout << "" << endl;
-	            goto initialize;
+        cout << x << " - " << y << " = " << (double)x - (double)y << endl;
+	    cout << "" << endl;
+	        break;
     case '*':
-            cout << x << " * " << y << " = " << (double)x * (double)y << endl;
-	        cout << "" << endl;
-	            goto initialize;
+        cout << x << " * " << y << " = " << (double)x * (double)y << endl;
+	    cout << "" << endl;
+	        break;
     case '/':
-            cout << x << " / " << y << " = " << (double)x / (double)y << endl;
-	        cout << "" << endl;
-	            goto initialize;
+        cout << x << " / " << y << " = " << (double)x / (double)y << endl;
+	    cout << "" << endl;
+	        break;
+	case 's':
+	    cout << x << "√(" << y << ")" << " = " << (double)x * sqrt(y);
+	    cout << "" << endl;
+	        break;
+    case '^':
+        cout << x << "^" << y << "=" << pow(x, y);
+        cout << "" << endl;
+            break;
     default:
-            cout << "you shouldn't see this error, if you do you should make a detailed bug report, thanks!";
-                break;
+        cout << "you shouldn't see this error, if you do you should make a detailed bug report, thanks!";
+            break;
     }
+goto initialize;
 }
 
 int main()
