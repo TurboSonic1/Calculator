@@ -52,7 +52,7 @@ for (;;) { //error handling for second number
     else if (cin.good());
         break; //continues to actual calculation
 }
-calculate: //function for calculation
+//Actual Calculations
     switch (math) {
         case '+':
             goto addition;
