@@ -14,9 +14,9 @@ for (;;) { //error handling for first number
 	cout << "please input the first number you want to calculate" << flush << endl; //flush is needed to verify that its cleared
 	cin >> x;
 	if (cin.fail()) { //if it fails
-            std::cerr << "Sorry, I cannot read that. Please try again." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cerr << "Sorry, I cannot read that. Please try again." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
     else if (cin.eof());
@@ -27,9 +27,9 @@ for (;;) { //error handling for second number
 	cout << "Please input the second number you want to calculate" << flush << endl;
 	cin >> y;
 	if (cin.fail()) { //if it fails
-            std::cerr << "Sorry, I cannot read that. Please try again." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cerr << "Sorry, I cannot read that. Please try again." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
     else if (cin.eof());
