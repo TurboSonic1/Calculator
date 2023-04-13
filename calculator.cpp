@@ -26,7 +26,6 @@ for (;;) { //error handling for first number
 initialize0:
     cout << "what math operation would you like to use" << endl;
     cin >> math;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
         switch (math) {
             case '+':
                 break;
@@ -53,35 +52,27 @@ for (;;) { //error handling for second number
         break; //continues to actual calculation
 }
 //Actual Calculations
-    switch (math) {
-        case '+':
-            goto addition;
-        case '-':
-            goto subtraction;
-        case '*':
-            goto multiplication;
-        case '/':
-            goto division;
-        default:
+switch (math) {
+    case '+':
+        cout << x << " + " << y << " = " << (double)x + (double)y << endl;
+	    cout << "" << endl;
+	        goto initialize;
+    case '-':
+            cout << x << " - " << y << " = " << (double)x - (double)y << endl;
+	        cout << "" << endl;
+	            goto initialize;
+    case '*':
+            cout << x << " * " << y << " = " << (double)x * (double)y << endl;
+	        cout << "" << endl;
+	            goto initialize;
+    case '/':
+            cout << x << " / " << y << " = " << (double)x / (double)y << endl;
+	        cout << "" << endl;
+	            goto initialize;
+    default:
             cout << "you shouldn't see this error, if you do you should make a detailed bug report, thanks!";
-            goto initialize;
+                break;
     }
-addition:
-	cout << x << " + " << y << " = " << (double)x + (double)y << endl;
-	cout << "" << endl;
-	    goto initialize;
-subtraction:
-	cout << x << " - " << y << " = " << (double)x - (double)y << endl;
-	cout << "" << endl;
-	    goto initialize;
-multiplication:
-	cout << x << " * " << y << " = " << (double)x * (double)y << endl;
-	cout << "" << endl;
-	    goto initialize;
-division:
-	cout << x << " / " << y << " = " << (double)x / (double)y << endl;
-	cout << "" << endl;
-	    goto initialize; // Yes I'm using goto in a function to loop my code.
 }
 
 int main()
