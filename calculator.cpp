@@ -1,22 +1,47 @@
+#include <limits>
 #include <iostream>
 using namespace std;
 
 void function() 
 {
 	cout << "This is a test of my c++ coding ability" << endl;
-calculate:
-	cout << "please input the first number you want to calculate" << endl;
-	double x;
+initialize:
+	double x; //using 64bit floating point numbers for variables
+	x = 0; // initialized as 0 to ensure its an integer
 	double y;
+	y = 0;
+for (;;) { //error handling for first number
+	cout << "please input the first number you want to calculate" << flush << endl; //flush is needed to verify that its cleared
 	cin >> x;
-	cout << "Please input the second number you want to calculate" << endl;
+	if (cin.fail()) { //if it fails
+            std::cerr << "Sorry, I cannot read that. Please try again." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+    else if (cin.eof());
+        goto initialize0; //verified to be good and continues
+}
+initialize0:
+for (;;) { //error handling for second number
+	cout << "Please input the second number you want to calculate" << flush << endl;
 	cin >> y;
+	if (cin.fail()) { //if it fails
+            std::cerr << "Sorry, I cannot read that. Please try again." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+    else if (cin.eof());
+        goto calculate; //continues to actual calculation
+}
+calculate: //function for calculation
 	cout << x << " + " << y << " = " << (double)x + (double)y << endl;
 	cout << x << " - " << y << " = " << (double)x - (double)y << endl;
 	cout << x << " * " << y << " = " << (double)x * (double)y << endl;
 	cout << x << " / " << y << " = " << (double)x / (double)y << endl;
 	cout << "" << endl;
-	goto calculate; // Yes I'm using goto in a function to loop my code.
+	goto initialize; // Yes I'm using goto in a function to loop my code.
 }
 
 int main()
