@@ -52,6 +52,17 @@ switch (math) { //Actual Calculations
         cout << "" << endl;
         z = pow(x,y);
             break;
+    case 'c':
+        cout << x << " 3^√(" << y << ")" << " = " << (double)x * cbrt (y);
+        cout << "" << endl;
+        z = x * cbrt (y);
+        break;
+    case 'r':
+        cout << x << "^√(" << y << ")" << " = " << pow(y, 1/x);
+        cout << "" << endl;
+        z = pow(x, 1/y);
+        cout << "" << endl;
+        break;
     default:
         cout << "you shouldn't see this error, if you do you should make a detailed bug report, thanks!";
             break;
@@ -74,6 +85,10 @@ cout << "what math operation would you like to use" << endl;
             case 's': //todo: make this more clear to user that its square root
                 break;
             case '^':
+                break;
+            case 'c': //cube root
+                break;
+            case 'r': //nth root
                 break;
             default:
                 cout << "This operation is not recognized please use standard arithmetic math or squareroots/exponents" << endl;
