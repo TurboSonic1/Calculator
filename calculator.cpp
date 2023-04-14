@@ -4,41 +4,6 @@
 #include <string>
 using namespace std;
 
-void operation(string &longword, int x, int y, int z){
-cout << "what math operation would you like to use" << endl;
-    cin >> longword;
-    char math = longword[0]; //only takes first letter of what the user types to prevents errors
-        switch (math) {
-            case '+':
-                break;
-            case '-':
-                break;
-            case '*':
-                break;
-            case '/':
-                break;
-            case 's': //todo: make this more clear to user that its square root
-                break;
-            case '^':
-                break;
-            default:
-                cout << "This operation is not recognized please use standard arithmetic math or squareroots/exponents" << endl;
-                operation;
-        }
-for (;;) { //error handling for second number
-	cout << "Please enter the second number(s) you want to have calculated" << flush << endl; //flush is needed to verify that its cleared
-	cin >> y;
-	if (cin.fail()) { //if it fails
-            cerr << "Sorry, I cannot read that. Please try again." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-        }
-    else if (cin.good());
-        break; //verified to be good and continues
-}
-}
-
 void startcalculation(double &x, double &z){
 for (;;) { //error handling for first number
 	cout << "Please enter the number(s) you want to have calculated" << flush << endl;
