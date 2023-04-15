@@ -1,77 +1,70 @@
 #include <limits>
 #include <iostream>
-#include <cmath>
 #include <string>
-using namespace std;
+#include <boost/multiprecision/cpp_bin_float.hpp>
+#include <boost/multiprecision/cpp_complex.hpp>
+#include <boost/math/special_functions/gamma.hpp>
+    boost::multiprecision::cpp_bin_float_oct x = 0;
+    boost::multiprecision::cpp_bin_float_oct y = 0;
+// yes I'm using global variables, I'll fix it later, just too lazy rn
 
-void startcalculation(double &x, double &z){
-for (;;) { //error handling for first number
-	cout << "Please enter the number(s) you want to have calculated" << flush << endl;
-	cin >> x;
-	if (cin.fail()) { //if it fails
-            cerr << "Sorry, I cannot read that. Please try again." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-        }
-    else if (cin.good());
-        break; //verified to be good and continues
-}
-}
-
-
-void calculation(char &math, double x, double y, double z) {
+void calculation(char &math, double a, double b) {
 switch (math) { //Actual Calculations
     case '+':
-        cout << x << " + " << y << " = " << (double)x + (double)y << endl;
-	    cout << "" << endl;
-        z = (double)x + (double)y;
+        std::cout << x << " + " << y << " = " << x + y << std::endl;
+	    std::cout << "" << std::endl;
 	        break;
     case '-':
-        cout << x << " - " << y << " = " << (double)x - (double)y << endl;
-	    cout << "" << endl;
-        z = x - y;
+        std::cout << x << " - " << y << " = " << x - y << std::endl;
+	    std::cout << "" << std::endl;
 	        break;
     case '*':
-        cout << x << " * " << y << " = " << (double)x * (double)y << endl;
-	    cout << "" << endl;
-        z = x * y;
+        std::cout << x << " * " << y << " = " << x * y << std::endl;
+	    std::cout << "" << std::endl;
 	        break;
     case '/':
-        cout << x << " / " << y << " = " << (double)x / (double)y << endl;
-	    cout << "" << endl;
-        z = x / y;
+        std::cout << x << " / " << y << " = " << x / y << std::endl;
+	    std::cout << "" << std::endl;
 	        break;
 	case 's':
-	    cout << x << "√(" << y << ")" << " = " << (double)x * sqrt(y);
-	    cout << "" << endl;
-        z = x * sqrt(y);
+	    std::cout << x << "√(" << y << ")" << " = " << x * sqrt(y);
+	    std::cout << "" << std::endl;
 	        break;
-    case '^':
-        cout << x << "^" << y << "=" << pow(x, y);
-        cout << "" << endl;
-        z = pow(x,y);
+// all of these operations below just don't work without being converted to double long (???)
+    case '^': 
+        std::cout << a << "^" << b << "=" << std::pow(a, b) << std::endl;
+        std::cout << "" << std::endl;
             break;
     case 'c':
-        cout << x << " 3^√(" << y << ")" << " = " << (double)x * cbrt (y);
-        cout << "" << endl;
-        z = x * cbrt (y);
+        std::cout << a << " 3^√(" << b << ")" << " = " << a * std::cbrt(b);
+        std::cout << "" << std::endl;
         break;
     case 'r':
-        cout << x << "^√(" << y << ")" << " = " << pow(y, 1/x);
-        cout << "" << endl;
-        z = pow(x, 1/y);
-        cout << "" << endl;
+       std::cout << a << "^√(" << b << ")" << " = " << pow(b, 1/a);
+       std::cout << "" << std::endl;
         break;
-    default:
-        cout << "you shouldn't see this error, if you do you should make a detailed bug report, thanks!";
+    default: 
+        std::cout << "you shouldn't see this error, if you do you should make a detailed bug report, thanks!";
             break;
     }
 }
 
-void operation(string &longword,double x, double y, double z){
-cout << "what math operation would you like to use" << endl;
-    cin >> longword;
+void startcalculation(std::string &longword){
+for (;;) { //error handling for first number
+	std::cout << "Please enter the number(s) you want to have calculated" << std::flush << std::endl;
+	std::cin >> x;
+	if (std::cin.fail()) { //if it fails
+            std::cerr << "Sorry, that's an invalid number, please use a rational number." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+    else if (std::cin.good());
+        break; //verified to be good and continues
+}
+std::cout << "What math operation would you like to use" << std::endl;
+    restart:
+    std::cin >> longword;
     char math = longword[0]; //only takes first letter of what the user types to prevents errors
         switch (math) {
             case '+':
@@ -91,44 +84,40 @@ cout << "what math operation would you like to use" << endl;
             case 'r': //nth root
                 break;
             default:
-                cout << "This operation is not recognized please use standard arithmetic math or squareroots/exponents" << endl;
-                operation (longword, x, y, z);
+                std::cout << "This operation is not recognized please use standard arithmetic math or squareroots/exponents" << std::endl;
+                goto restart;
+                break; (longword);
         }
 for (;;) { //error handling for second number
-	cout << "Please enter the second number(s) you want to have calculated" << flush << endl; //flush is needed to verify that its cleared
-	cin >> y;
-	if (cin.fail()) { //if it fails
-            cerr << "Sorry, I cannot read that. Please try again." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	std::cout << "Please enter the second number(s) you want to have calculated" << std::flush << std::endl; //flush is needed to verify that its cleared
+	std::cin >> y;
+	if (std::cin.fail()) { //if it fails
+            std::cerr << "Sorry, that's an invalid number, please use a rational number." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-    else if (cin.good());
-        calculation (math, x, y, z);
+    else if (std::cin.good());
+        double a = (double) x * 1;
+        double b = (double) y * 1;
+        calculation (math, a, b);
         break; //verified to be good and continues
 }
 }
 
-void clearvalues(string &longword, double &x, double &y, double &z)
+void clearvalues(std::string &longword) // for looping it and making sure all values are cleared
 {
-    startcalculation(x, z);
-    operation(longword, x, y, z);
-    clearvalues(longword, x, y, z);
+    startcalculation(longword);
+    clearvalues(longword);
 }
 
 int main()
 {
-cout << "This is a test of my c++ coding ability" << endl;
-	double x; //using 64bit floating point numbers for variables
-	    x = 0; // initialized as 0 to ensure its an integer
-	double y;
-	    y = 0;
-    double z; //currently not in use, for future update
-        z = 0;
-	string longword;
+using namespace boost::multiprecision;
+std::cout << "This is a test of my c++ coding ability" << std::endl;
+	std::string longword;
 	longword.clear();
-    startcalculation(x, z);
-    operation(longword, x, y, z);
-    clearvalues(longword, x, y, z);
+    startcalculation(longword);
+    clearvalues(longword);
     return 0;
 }
