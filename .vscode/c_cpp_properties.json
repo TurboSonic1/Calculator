@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\vsclibraries\\boost_1_82_0"
             ],
             "defines": [
                 "_DEBUG",
