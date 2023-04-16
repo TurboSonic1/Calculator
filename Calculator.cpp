@@ -292,6 +292,7 @@ void continuecalculation(std::string longword, char Language, char shortstage) {
 void clearvalues(std::string& longword, char Language, char shortstage) // for looping it and making sure all values are cleared
 {
     startcalculation(longword, Language, shortstage);
+    continuecalculation(longword, Language, shortstage);
     clearvalues(longword, Language, shortstage);
 }
 
