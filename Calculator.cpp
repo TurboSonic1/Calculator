@@ -11,7 +11,7 @@ boost::multiprecision::cpp_bin_float_oct y = 0;
 // yes I'm using global variables, I'll fix it later, just too lazy rn
 char shortstage = '0';
 
-void Checklanguage(char Language, int Initiallanguage) {
+void Checklanguage(char & Language, int Initiallanguage) { // referencing a variable is pretty important
 //    std::string checklanguage;
 //    std::ifstream configuration; configuration.open("cfg");
     char Shortlanguage = '0';
@@ -23,23 +23,6 @@ void Checklanguage(char Language, int Initiallanguage) {
 //        }
 //    }
     bool HasLanguage = 0;
-    switch (Shortlanguage) {
-    case 'E':
-        HasLanguage = 1;
-        Language = 0;
-        break;
-    case 'D':
-        HasLanguage = 1;
-        Language = 1;
-        break;
-    case '0':
-        HasLanguage = 0;
-        break;
-    default:
-        HasLanguage = 0;
-        break;
-    }
-
     if (HasLanguage == 0) {
         std::cout << "Please type the number for your language" << std::endl;
         std::cout << "(0) English" << std::endl;
@@ -54,13 +37,16 @@ void Checklanguage(char Language, int Initiallanguage) {
         case '1':
             Language = '1';
             break;
+        default:
+            std::cout << "Initial language invalid!" << std::endl;
+            break;
 
         }
     }
 }
 
 /* Shortstage numbers meanings:
-0 = Initilized
+0 = Intialized
 1 = Starting problem
 2 = Asking for Operation
 3 = Asking for Second number
@@ -229,7 +215,7 @@ void calculation(char& math, double a, double b) {
 void startcalculation(std::string& longword, char Language, char shortstage) {
     for (;;) { //error handling for first number
         shortstage = '1';
-//        std::cout << "Please enter the number(s) you want to have calculated" << std::flush << std::endl;
+        //        std::cout << "Please enter the number(s) you want to have calculated" << std::flush << std::endl;
         Translation(Language, shortstage);
         std::cin >> x;
         if (std::cin.fail()) { //if it fails
@@ -239,8 +225,13 @@ void startcalculation(std::string& longword, char Language, char shortstage) {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-        else if (std::cin.good());
+        else if (std::cin.good()) {
         break; //verified to be good and continues
+        }   
+        else {
+            std::cout << "Unexpected writing condition!" << std::endl;
+            startcalculation(longword, Language, shortstage);
+        }
     }
     shortstage = '2';
     Translation(Language, shortstage);
@@ -281,11 +272,17 @@ void continuecalculation(std::string longword, char Language, char shortstage) {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
-        else if (std::cin.good());
-        double a = (double)x * 1;
-        double b = (double)y * 1;
-        calculation(math, a, b);
-        break; //verified to be good and continues
+        else if (std::cin.good()){
+            double a = (double)x * 1;
+                double b = (double)y * 1;
+                calculation(math, a, b);
+                break; //verified to be good and continues
+        }
+        else {
+            std::cout << "Unexpected writing condition!" << std::endl;
+            continuecalculation(longword, Language, shortstage);
+        }
+
     }
 }
 
@@ -294,21 +291,22 @@ void clearvalues(std::string& longword, char Language, char shortstage) // for l
     startcalculation(longword, Language, shortstage);
     continuecalculation(longword, Language, shortstage);
     clearvalues(longword, Language, shortstage);
+    std::cout << "Program broke out of loop unexpectedly!" << std::endl;
 }
 
 int main()
 {
-    int Initiallanguage = 0;
     char Language = '0';
+    int Initiallanguage = 0;
     std::cout << "This is a test of my c++ coding ability" << std::endl;
     Checklanguage(Language, Initiallanguage);
     shortstage = '0';
 //    std::cin >> x; for later with selecting language
-    using namespace boost::multiprecision;
     std::string longword;
     longword.clear();
     startcalculation(longword, Language, shortstage);
     continuecalculation(longword, Language, shortstage);
     clearvalues(longword, Language, shortstage);
+    std::cout << "Program terminated unexpectedly!" << std::endl;
     return 0;
 }
